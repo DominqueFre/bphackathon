@@ -1,0 +1,74 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table user {
+  id integer [primary key]
+  username varchar
+  role varchar
+  created_at timestamp
+}
+
+Table bpposts {
+  id integer [primary key]
+  diastolic integer(3) [not null, note: 'maximum 999'] 
+  diastolic_uom varchar(5) [default:'mmHg']
+  systolic integer(3) [not null, note: 'maximum 999']
+  systolic_uom varchar(5) [default:'mmHg']
+  pulse integer(3)
+  arm varchar(5) [note: 'Left, Right are valid, neither should be default placeholder text']
+  position varchar [note: 'Sitting, Standing and Prone are valid']
+  comment text(200) [note: 'Content of the post']
+  user_id integer [ref: > user.id] // many-to-one
+  reading_date timestamp [note: 'placeholder text of today']
+  reading_time timestamp [note: 'placeholder text of now']
+  created_at timestamp
+}
+
+Table baseinfo {
+  id integer [primary key]
+  user_id integer [ref: > user.id] // one-to-one
+  nhs_number varchar(12)
+}
+
+Table heightinfo {
+  id integer [primary key]
+  user_id integer [ref: > user.id] // one-to-one
+  height float [note: '2d.p.']
+  UOM varchar(8) [default: 'm', note: 'where m is metres']
+}
+
+Table weightinfo {
+  id integer [primary key]
+  user_id integer [ref: > user.id] // one-to-one
+  weight float(10) [note: '3 d.p.']
+  UOM varchar(8)  [default: 'Kg']
+}
+
+Records user(id, username, role) {
+  0, 'Alice', 'admin'
+  1, 'Bob', 'moderator'
+  2, 'Candice', 'moderator'
+  3, 'David', 'member'
+  4, 'Jeremy', 'member'
+}
+
+Records bpposts(id, diastolic, diastolic_uom, systolic, systolic_uom, pulse, arm, position, comment, user_id, reading_date, reading_time, created_at){
+  0, 120, 'mmHg', 90, 'mmHg', 72, 'Left', 'Prone', 'Poor sleep quality', 3, '23 Mar 2026', '08:15', '23 Mar 2026'
+  1, 91, 'mmHg', 59, 'mmHg', 72, 'Right', 'Prone', 'Poor quality sleep', 3, '23 Mar 2026', '08:17', '23 Mar 2026'
+}
+
+Records baseinfo(id, user_id, nhs_number) {
+  3, 1, '123 246 678'
+  4, 2, '303 801 465'
+}
+
+Records heightinfo(id, user_id, height, UOM) {
+  0, 3, 1.96, 'm'
+  1, 4, 2.03, 'm'
+}
+
+Records weightinfo(id, user_id, weight, UOM) {
+  0, 3, 72, 'Kg' 
+  1, 4, 85, 'Kg'
+}
+

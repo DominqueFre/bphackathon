@@ -1,3 +1,9 @@
+# Python.gitignore
+# nonstandard Python related files to ignore
+.venv/
+venv/
+emv.py
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
