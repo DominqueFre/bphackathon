@@ -7,7 +7,7 @@ os.environ.setdefault(
 
 os.environ.setdefault(
     'SECRET_KEY',
-    'django-insecure-yddo4q0l44h^aefdna&_rrjohs2h%y9)=c__x^kk=23aj^x)f6'
+    'e1u4rt-cqpf_i#204au^574dpzc(h$3anwxmkk9&%yaa56_#gb'
     )
 
 os.environ.setdefault(
