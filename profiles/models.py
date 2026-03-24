@@ -10,6 +10,7 @@ class UserProfile(models.Model):
         NON_BINARY = "non_binary", "Non-binary"
         PREFER_NOT_TO_SAY = "prefer_not_to_say", "Prefer not to say"
 
+    # One profile record per authenticated user.
     user = models.OneToOneField(
         User,
         on_delete=models.CASCADE,
@@ -55,6 +56,7 @@ class UserProfile(models.Model):
         help_text="Weight in kilograms, e.g. 72.40",
     )
 
+    # Audit timestamps for basic record tracking.
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -63,6 +65,7 @@ class UserProfile(models.Model):
         # BMI = kg / m^2
         if not self.height_m or self.height_m <= 0:
             return None
+        # Round to one decimal place for display consistency.
         value = Decimal(self.weight_kg) / (Decimal(self.height_m) * Decimal(self.height_m))
         return value.quantize(Decimal("0.1"), rounding=ROUND_HALF_UP)
 

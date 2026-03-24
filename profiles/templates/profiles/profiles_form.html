@@ -8,6 +8,7 @@
 <body>
     <h1>User Profile</h1>
 
+    <!-- Flash messages shown after profile save operations. -->
     {% if messages %}
         <ul>
             {% for message in messages %}
@@ -16,6 +17,7 @@
         </ul>
     {% endif %}
 
+    <!-- BMI is calculated from saved height and weight in the model property. -->
     <p><strong>Current BMI:</strong>
         {% if profile and profile.bmi %}
             {{ profile.bmi }}
