@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap");
+
+/* Global design tokens shared by all pages. */
+:root {
+  --bg: #f7fbfa;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --accent: #0f766e;
+  --accent-hover: #115e59;
+  --success-bg: #ecfdf5;
+  --success-text: #065f46;
+}
+
+/* Base reset and typography defaults. */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  font-family: "Anonymous Pro", monospace;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #dff5ef 0%, var(--bg) 45%);
+}
+
+/* Main content card used by all form pages. */
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  margin-top: 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* Generic flash message styling shared across pages. */
+ul.messages {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+ul.messages li {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid #a7f3d0;
+}
+
+/* Global form control baseline. */
+form p {
+  margin: 0 0 0.9rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+small,
+.helptext {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+}
+
+/* Shared primary action button style. */
+.btn-save {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background: var(--accent-hover);
+}

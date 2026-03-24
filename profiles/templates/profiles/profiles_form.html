@@ -1,46 +1,40 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile</title>
-    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-</head>
+{% block title %}Your Profile{% endblock %}
 
-<body>
-    <main class="container">
-        <h1><i class="fa-solid fa-heart-pulse"></i> User Profile</h1>
+{% block extra_css %}
+<!-- Page-level styling that complements global styles in base.css. -->
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
 
-        <!-- Flash messages shown after profile save operations. -->
-        {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+{% block content %}
+<h1><i class="fa-solid fa-heart-pulse"></i> User Profile</h1>
 
-        <!-- BMI is calculated from saved height and weight in the model property. -->
-        <p class="bmi-box">
-            <strong>Current BMI:</strong>
-            {% if profile and profile.bmi %}
-            {{ profile.bmi }}
-            {% else %}
-            N/A
-            {% endif %}
-        </p>
+<!-- Flash messages shown after profile save operations. -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button class="btn-save" type="submit">
-                <i class="fa-solid fa-floppy-disk"></i> Save Profile
-            </button>
-        </form>
-    </main>
-</body>
+<!-- BMI is calculated from saved height and weight in the model property. -->
+<p class="bmi-box">
+    <strong>Current BMI:</strong>
+    {% if profile and profile.bmi %}
+    {{ profile.bmi }}
+    {% else %}
+    N/A
+    {% endif %}
+</p>
 
-</html>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn-save" type="submit">
+        <i class="fa-solid fa-floppy-disk"></i> Save Profile
+    </button>
+</form>
+{% endblock %}

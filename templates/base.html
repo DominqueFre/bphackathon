@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}BP Hackathon{% endblock %}</title>
+
+    <!-- Shared styles used across all pages. -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- Page-specific styles can be injected here. -->
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <main class="container">
+        <!-- Main page content area. -->
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
