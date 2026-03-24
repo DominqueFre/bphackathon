@@ -1,35 +1,46 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Profile</title>
+    <link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
-<body>
-    <h1>User Profile</h1>
 
-    <!-- Flash messages shown after profile save operations. -->
-    {% if messages %}
+<body>
+    <main class="container">
+        <h1><i class="fa-solid fa-heart-pulse"></i> User Profile</h1>
+
+        <!-- Flash messages shown after profile save operations. -->
+        {% if messages %}
         <ul>
             {% for message in messages %}
-                <li>{{ message }}</li>
+            <li>{{ message }}</li>
             {% endfor %}
         </ul>
-    {% endif %}
-
-    <!-- BMI is calculated from saved height and weight in the model property. -->
-    <p><strong>Current BMI:</strong>
-        {% if profile and profile.bmi %}
-            {{ profile.bmi }}
-        {% else %}
-            N/A
         {% endif %}
-    </p>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save Profile</button>
-    </form>
+        <!-- BMI is calculated from saved height and weight in the model property. -->
+        <p class="bmi-box">
+            <strong>Current BMI:</strong>
+            {% if profile and profile.bmi %}
+            {{ profile.bmi }}
+            {% else %}
+            N/A
+            {% endif %}
+        </p>
+
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn-save" type="submit">
+                <i class="fa-solid fa-floppy-disk"></i> Save Profile
+            </button>
+        </form>
+    </main>
 </body>
+
 </html>

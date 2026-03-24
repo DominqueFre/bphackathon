@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&display=swap");
+
+/* Theme tokens used across the profile page. */
+:root {
+  --bg: #f7fbfa;
+  --panel: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --accent: #0f766e;
+  --accent-hover: #115e59;
+  --success-bg: #ecfdf5;
+  --success-text: #065f46;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Page shell and background treatment. */
+body {
+  margin: 0;
+  padding: 2rem 1rem;
+  font-family: "Anonymous Pro", monospace;
+  color: var(--text);
+  background: radial-gradient(circle at top right, #dff5ef 0%, var(--bg) 45%);
+}
+
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+h1 {
+  margin-top: 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+/* BMI summary panel near the top of the form. */
+.bmi-box {
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1rem;
+}
+
+ul.messages {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+/* Success/error flash messages returned from Django views. */
+ul.messages li {
+  padding: 0.7rem 0.9rem;
+  border-radius: 8px;
+  background: var(--success-bg);
+  color: var(--success-text);
+  border: 1px solid #a7f3d0;
+}
+
+form p {
+  margin: 0 0 0.9rem;
+}
+
+/* Form controls and helper text. */
+label {
+  display: block;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+input,
+select {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+small,
+.helptext {
+  display: block;
+  color: var(--muted);
+  margin-top: 0.25rem;
+  font-size: 0.82rem;
+}
+
+/* Primary call-to-action button. */
+.btn-save {
+  margin-top: 0.5rem;
+  background: var(--accent);
+  color: #fff;
+  border: 0;
+  border-radius: 8px;
+  padding: 0.65rem 1rem;
+  font-family: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.btn-save:hover {
+  background: var(--accent-hover);
+}
