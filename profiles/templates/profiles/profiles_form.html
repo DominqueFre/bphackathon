@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Your Profile{% endblock %}
+
+{% block extra_css %}
+<!-- Page-level styling that complements global styles in base.css. -->
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1><i class="fa-solid fa-heart-pulse"></i> User Profile</h1>
+
+<!-- Flash messages shown after profile save operations. -->
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- BMI is calculated from saved height and weight in the model property. -->
+<p class="bmi-box">
+    <strong>Current BMI:</strong>
+    {% if profile and profile.bmi %}
+    {{ profile.bmi }}
+    {% else %}
+    N/A
+    {% endif %}
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn-save" type="submit">
+        <i class="fa-solid fa-floppy-disk"></i> Save Profile
+    </button>
+</form>
+{% endblock %}
