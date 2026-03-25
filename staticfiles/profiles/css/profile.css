@@ -1,0 +1,8 @@
+/* BMI summary panel shown above the profile form. */
+.bmi-box {
+  border: 1px solid var(--border);
+  background: #f9fafb;
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+  margin: 0 0 1rem;
+}
