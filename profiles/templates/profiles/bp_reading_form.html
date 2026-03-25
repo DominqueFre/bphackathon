@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add BP Reading{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1><i class="fa-solid fa-heart-pulse"></i> Add Blood Pressure Reading</h1>
+
+<!-- Pre-reading advice for patients -->
+<div class="bmi-box">
+    <strong>Before taking your reading:</strong><br>
+    &#8226; Sit quietly for at least 5 minutes<br>
+    &#8226; Don't eat a large meal within 30 minutes<br>
+    &#8226; Avoid caffeine and exercise beforehand<br>
+    &#8226; Take at least 2 readings, 1 minute apart
+</div>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn-save" type="submit">
+        <i class="fa-solid fa-floppy-disk"></i> Save Reading
+    </button>
+</form>
+
+<p style="margin-top: 1rem;">
+    <a href="{% url 'profile' %}">
+        <i class="fa-solid fa-arrow-left"></i> Back to Profile
+    </a>
+</p>
+{% endblock %}
