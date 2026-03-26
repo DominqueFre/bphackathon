@@ -2,50 +2,10 @@
 a simple administrative application for the recording of blood pressure readings
 
 ## Table of Contents
--[todelete](#todelete)
+
 -[Introduction](#introduction)
--[Initial steps for setup and deployment](#initial-steps-for-setup-and-deployment)
-    -[Steps for Django Framework setup](#steps-for-django-framework-setup)
-    -[Steps for deployment](#steps-for-deployment) 
--[Learning Objectives](#learning-objectives)
--[AI Usage](#ai-usage)
--[Supporting documentation](#supporting-documentation)
--[Sources](#sources)
 
 
-# todelete
-To deletevfrom readme after/if used
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
-</style>
-.anonymous-pro-regular {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.anonymous-pro-bold {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 700;
-  font-style: normal;
-}
-
-.anonymous-pro-regular-italic {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 400;
-  font-style: italic;
-}
-
-.anonymous-pro-bold-italic {
-  font-family: "Anonymous Pro", monospace;
-  font-weight: 700;
-  font-style: italic;
-}
-
-Font awesome
-fa-solid fa-heart-pulse      	- for sitting readings  - default
-fa-solid fa-bed-pulse		- for prone readings
-fa-solid fa-person		- for standing readings
 
 
 
