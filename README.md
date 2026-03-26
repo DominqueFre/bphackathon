@@ -1,17 +1,221 @@
-# bphackathon
-a simple administrative application for the recording of blood pressure readings
+# Blood Pressure Tracker
 
-## Table of Contents
+A simple, clean, and fully responsive Django web application that allows users to record, view, and manage their blood pressure readings.  
+The project was built collaboratively during a hackathon and focuses on delivering essential CRUD functionality, user authentication, and a polished Bootstrap‑based UI.
 
--[Introduction](#introduction)
+---
+
+## 🚀 Live Site  
+**Live Deployment:** *[Insert Heroku link here]*  
+**GitHub Repository:** *[Insert repo link here]*
+
+---
+
+## 📌 Project Overview
+
+Blood Pressure Tracker is a lightweight health‑monitoring tool that enables users to:
+
+- Create and manage a personal health profile  
+- Automatically calculate BMI  
+- Record blood pressure readings with systolic, diastolic, pulse, arm, and position data  
+- View readings in a clean, sortable table  
+- Edit or delete readings  
+- Access all features through a secure login system powered by Django Allauth  
+
+The goal was to build a functional, accessible, and user‑friendly MVP within a short timeframe.
+
+---
+
+## ✨ Features
+
+### 🔐 Authentication
+- User registration, login, logout (Django Allauth)
+- Custom‑styled login, signup, and logout pages
+- Login required for all profile and reading pages
+
+### 👤 User Profile
+- NHS number, age, gender, height, weight
+- Automatic BMI calculation
+- Profile summary page
+- Profile edit page
+
+### ❤️ Blood Pressure Readings
+- Add new readings
+- Edit existing readings
+- Delete readings with confirmation
+- View all readings in a Bootstrap table
+- Colour‑coded systolic/diastolic values
+- Icons for reading position (sitting, standing, prone)
+
+### 🎨 UI & UX
+- Fully responsive Bootstrap 5 layout
+- Consistent card‑based design
+- Clear navigation and call‑to‑action buttons
+- FontAwesome icons throughout
+
+---
+
+## 🗂️ Data Model
+
+### **UserProfile**
+| Field | Type | Notes |
+|-------|------|-------|
+| user | OneToOneField | Linked to Django User |
+| nhs_number | CharField | Basic validation |
+| age | IntegerField | |
+| gender | CharField | Choice field |
+| height_m | DecimalField | Used for BMI |
+| weight_kg | DecimalField | Used for BMI |
+| created_at | DateTimeField | Auto timestamp |
+| updated_at | DateTimeField | Auto timestamp |
+
+**BMI** is calculated via a model property.
+
+---
+
+### **BloodPressureReading**
+| Field | Type | Notes |
+|-------|------|-------|
+| user | ForeignKey | Linked to Django User |
+| systolic | IntegerField | Validated |
+| diastolic | IntegerField | Validated |
+| pulse | IntegerField | Optional |
+| arm | CharField | Choice field |
+| position | CharField | Choice field |
+| reading_date | DateField | |
+| reading_time | TimeField | |
+| comment | TextField | Optional |
+
+---
+
+## 🔄 CRUD Functionality
+
+### Profile
+- **Create**: First visit to profile edit page  
+- **Read**: Profile summary page  
+- **Update**: Edit profile  
+- **Delete**: Not required for this MVP  
+
+### Blood Pressure Readings
+- **Create**: Add reading form  
+- **Read**: Reading list table  
+- **Update**: Edit reading  
+- **Delete**: Delete confirmation page  
+
+All CRUD operations are restricted to the logged‑in user.
+
+---
+
+## 🔒 Security & Authentication
+
+- Django Allauth handles registration, login, logout  
+- Login required for all profile and reading views  
+- Users can only access their own data  
+- CSRF protection enabled  
+- Form validation on both client and server side  
+
+---
+
+## 🧪 Automated Testing
+
+Automated tests were written using Django’s built‑in `TestCase` framework.
+
+### ✔ Model Tests
+- BMI calculation  
+- String representations  
+- Reading creation  
+
+### ✔ Form Tests
+- Valid and invalid profile form data  
+- Valid and invalid reading form data  
+
+### ✔ View Tests
+- Login required redirects  
+- Correct templates rendered  
+- Successful reading creation  
+- Profile page loads correctly  
+
+### ✔ Test Result
+All tests passed successfully.  
+*(Screenshot can be added later if desired.)*
+
+Run tests with:
+
+```
+python manage.py test
+```
+
+---
+
+## 🧪 Manual Testing
+
+Manual testing was performed on all key user flows:
+
+- Login / Logout  
+- Signup  
+- Profile creation and editing  
+- Adding readings  
+- Editing readings  
+- Deleting readings  
+- Navigation links  
+- Form validation  
+- Mobile responsiveness  
+
+All functionality behaved as expected.
+
+---
+
+## 🌐 Deployment
+
+The project was deployed to **Heroku** using:
+
+- PostgreSQL database  
+- `whitenoise` for static file handling  
+- `gunicorn` as the WSGI server  
+
+### Required Config Vars:
+- `SECRET_KEY`
+- `DEBUG` (set to False)
+- `DATABASE_URL`
+- `ALLOWED_HOSTS`
+- `CLOUDINARY_URL` (if used for media)
+
+### Deployment Steps:
+1. Push code to GitHub  
+2. Connect Heroku to the repository  
+3. Set config vars  
+4. Run migrations  
+5. Collect static files  
+6. Deploy  
+
+---
+
+## 🛠️ Technologies Used
+
+- **Python 3**  
+- **Django 5**  
+- **Django Allauth**  
+- **Bootstrap 5**  
+- **Crispy Forms**  
+- **FontAwesome**  
+- **PostgreSQL**  
+- **Heroku**  
+
+---
+
+## 👥 Credits
+
+This project was created collaboratively by:
+
+- **Jordan** — Developer  
+- **Dominique**  — Developer  
+- **Saikou**  — Developer  
+- **Aklak**  — Developer  
+
+---
+
+## 📄 License
+
+This project is for educational purposes and hackathon use.
 
 
-
-
-
-# Introduction
-The intention of this application is to record the blood pressure of NHS patients and associated, relevant data.  It is to be created via a hackathon, consisting of a team of four people, namely Aklak, Dominique, Jordan, and Saikou, over the course of three days commencing 4th of March with a deadline of 5pm 26th March 2026.
-This hackathon will represent the first sprint in creating such an application, with the aim being to create a functioning application that will allow a user to register and then add their basic data (NHS number, height and weight), before being able to log on as required and create entries for their blood pressure readings, view the history of their blood pressure readings and if necessary edit or delete them.  It is common practice to ignore, for example, the first few readings that are taken due to the data being skewed by abnormal readings, as patients are getting used to using a blood pressure monitor (calculation of averages and automatic removal of outliers is outside the scope of this sprint).
-The data to be recorded for blood pressure is systolic pressure in mmHg, diastolic pressure in mmHg, pulse, left or right arm, prone, sitting or standing position and time and date of reading with an additional comment field, for additional non-standard related data.
-There will be a general reminder of the various requirements required prior to taking a standard reading, to reiterate the advice and direction provided by health professionals, such as to sit quietly for at least five minutes, and not to have eaten a large meal within the last thirty minutes, and the minimum number of expected readings.  Future functionality could include specific patient direction, where the reading requirements are not standard.
-There will be data-entry fields that will prevent null entry and will restrict with a limited ranges for their entries, in order to facilitate analysis and reduce risk of erroneous entries (making it easier for the user to enter the data correctly and therefore taking up less of the health professionals time looking at incorrect readings).
