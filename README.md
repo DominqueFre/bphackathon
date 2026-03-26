@@ -6,8 +6,8 @@ The project was built collaboratively during a hackathon and focuses on deliveri
 ---
 
 ## 🚀 Live Site  
-**Live Deployment:** *[Insert Heroku link here]*  
-**GitHub Repository:** *[Insert repo link here]*
+**Live Deployment:** *(https://shielded-springs-56275-f2da7cb0bd7a.herokuapp.com/)*  
+**GitHub Repository:** *(https://github.com/DominqueFre/bphackathon)*
 
 ---
 
