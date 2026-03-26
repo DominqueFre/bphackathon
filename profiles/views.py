@@ -86,3 +86,9 @@ def delete_bp_reading(request, pk):
         return redirect("bp_reading_list")
 
     return render(request, "profiles/bp_reading_confirm_delete.html", {"reading": reading})
+
+
+@login_required
+def profile_detail(request):
+    profile = UserProfile.objects.filter(user=request.user).first()
+    return render(request, "profiles/profile_detail.html", {"profile": profile})

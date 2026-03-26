@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="fa-solid fa-user me-2"></i>My Profile
+                </h4>
+            </div>
+
+            <div class="card-body">
+
+                {% if profile %}
+                <p><strong>NHS Number:</strong> {{ profile.nhs_number }}</p>
+                <p><strong>Age:</strong> {{ profile.age }}</p>
+                <p><strong>Gender:</strong> {{ profile.get_gender_display }}</p>
+                <p><strong>Height:</strong> {{ profile.height_m }} m</p>
+                <p><strong>Weight:</strong> {{ profile.weight_kg }} kg</p>
+                <p><strong>BMI:</strong> {{ profile.bmi }}</p>
+
+                <hr>
+
+                <p class="text-muted small">
+                    Created: {{ profile.created_at|date:"d M Y H:i" }}<br>
+                    Updated: {{ profile.updated_at|date:"d M Y H:i" }}
+                </p>
+
+                {% else %}
+                <p>You haven’t created your profile yet.</p>
+                {% endif %}
+
+                <div class="d-flex gap-2 mt-3">
+                    <a href="{% url 'profile_edit' %}" class="btn btn-primary">
+                        <i class="fa-solid fa-pen-to-square me-1"></i>Edit Profile
+                    </a>
+
+                    <a href="{% url 'add_bp_reading' %}" class="btn btn-success">
+                        <i class="fa-solid fa-plus me-1"></i>Add Reading
+                    </a>
+
+                    <a href="{% url 'bp_reading_list' %}" class="btn btn-secondary">
+                        <i class="fa-solid fa-list me-1"></i>View Readings
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}
