@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Readings{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'profiles/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<h1><i class="fa-solid fa-heart-pulse"></i> My Blood Pressure Readings</h1>
+
+<!-- Link to add a new reading -->
+<p>
+    <a href="{% url 'add_bp_reading' %}" class="btn-save">
+        <i class="fa-solid fa-plus"></i> Add New Reading
+    </a>
+</p>
+
+{% if readings %}
+<table style="width: 100%; border-collapse: collapse; margin-top: 1rem;">
+    <thead>
+        <tr style="border-bottom: 2px solid #333; text-align: left;">
+            <th style="padding: 8px;">Date</th>
+            <th style="padding: 8px;">Time</th>
+            <th style="padding: 8px;">Systolic</th>
+            <th style="padding: 8px;">Diastolic</th>
+            <th style="padding: 8px;">Pulse</th>
+            <th style="padding: 8px;">Arm</th>
+            <th style="padding: 8px;">Position</th>
+            <th style="padding: 8px;">Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reading in readings %}
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td style="padding: 8px;">{{ reading.reading_date }}</td>
+            <td style="padding: 8px;">{{ reading.reading_time }}</td>
+            <td style="padding: 8px;">{{ reading.systolic }}</td>
+            <td style="padding: 8px;">{{ reading.diastolic }}</td>
+            <td style="padding: 8px;">{{ reading.pulse|default:"—" }}</td>
+            <td style="padding: 8px;">{{ reading.get_arm_display }}</td>
+            <td style="padding: 8px;">
+                {% if reading.position == "sitting" %}
+                    <i class="fa-solid fa-heart-pulse"></i>
+                {% elif reading.position == "prone" %}
+                    <i class="fa-solid fa-bed-pulse"></i>
+                {% elif reading.position == "standing" %}
+                    <i class="fa-solid fa-person"></i>
+                {% endif %}
+                {{ reading.get_position_display }}
+            </td>
+            <td style="padding: 8px;">{{ reading.comment|default:"—" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% else %}
+<!-- Shown when the user has no readings yet -->
+<p class="bmi-box">No readings yet. Click "Add New Reading" to get started.</p>
+{% endif %}
+
+<p style="margin-top: 1rem;">
+    <a href="{% url 'profile' %}">
+        <i class="fa-solid fa-arrow-left"></i> Back to Profile
+    </a>
+</p>
+{% endblock %}

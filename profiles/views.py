@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from .forms import UserProfileForm, BloodPressureReadingForm
-from .models import UserProfile
+from .models import UserProfile, BloodPressureReading
 
 
 def home(request):
@@ -51,3 +51,9 @@ def add_bp_reading(request):
         form = BloodPressureReadingForm()
 
     return render(request, "profiles/bp_reading_form.html", {"form": form})
+
+@login_required
+def bp_reading_list(request):
+    """Displays all blood pressure readings for the logged-in user."""
+    readings = BloodPressureReading.objects.filter(user=request.user)
+    return render(request, "profiles/bp_reading_list.html", {"readings": readings})
