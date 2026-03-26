@@ -37,4 +37,14 @@
         <i class="fa-solid fa-floppy-disk"></i> Save Profile
     </button>
 </form>
+
+<p style="margin-top: 1rem;">
+    <a href="{% url 'bp_reading_list' %}">
+        <i class="fa-solid fa-list"></i> View My Readings
+    </a>
+    &nbsp;|&nbsp;
+    <a href="{% url 'add_bp_reading' %}">
+        <i class="fa-solid fa-plus"></i> Add New Reading
+    </a>
+</p>
 {% endblock %}

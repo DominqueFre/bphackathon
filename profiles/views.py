@@ -57,3 +57,32 @@ def bp_reading_list(request):
     """Displays all blood pressure readings for the logged-in user."""
     readings = BloodPressureReading.objects.filter(user=request.user)
     return render(request, "profiles/bp_reading_list.html", {"readings": readings})
+
+@login_required
+def edit_bp_reading(request, pk):
+    """Allows the user to edit one of their own readings."""
+    reading = BloodPressureReading.objects.get(pk=pk, user=request.user)
+
+    if request.method == "POST":
+        form = BloodPressureReadingForm(request.POST, instance=reading)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Reading updated!")
+            return redirect("bp_reading_list")
+    else:
+        form = BloodPressureReadingForm(instance=reading)
+
+    return render(request, "profiles/bp_reading_form.html", {"form": form})
+
+
+@login_required
+def delete_bp_reading(request, pk):
+    """Allows the user to delete one of their own readings."""
+    reading = BloodPressureReading.objects.get(pk=pk, user=request.user)
+
+    if request.method == "POST":
+        reading.delete()
+        messages.success(request, "Reading deleted!")
+        return redirect("bp_reading_list")
+
+    return render(request, "profiles/bp_reading_confirm_delete.html", {"reading": reading})
