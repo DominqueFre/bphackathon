@@ -29,6 +29,7 @@
             <th style="padding: 8px;">Arm</th>
             <th style="padding: 8px;">Position</th>
             <th style="padding: 8px;">Comment</th>
+            <th style="padding: 8px;">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -51,6 +52,15 @@
                 {{ reading.get_position_display }}
             </td>
             <td style="padding: 8px;">{{ reading.comment|default:"—" }}</td>
+            <td style="padding: 8px;">
+    <a href="{% url 'edit_bp_reading' reading.pk %}">
+        <i class="fa-solid fa-pen"></i> Edit
+    </a>
+    &nbsp;
+    <a href="{% url 'delete_bp_reading' reading.pk %}" style="color: #dc3545;">
+        <i class="fa-solid fa-trash"></i> Delete
+    </a>
+</td>
         </tr>
         {% endfor %}
     </tbody>
