@@ -1,8 +1,8 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
-from .forms import UserProfileForm
-from .models import UserProfile
+from .forms import UserProfileForm, BloodPressureReadingForm
+from .models import UserProfile, BloodPressureReading
 
 
 def home(request):
@@ -34,3 +34,26 @@ def profile_upsert(request):
         "profiles/profiles_form.html",
         {"form": form, "profile": profile},
     )
+#Handles adding a new blood pressure reading.
+
+@login_required
+def add_bp_reading(request):
+
+    if request.method == "POST":
+        form = BloodPressureReadingForm(request.POST)
+        if form.is_valid():
+            reading = form.save(commit=False)
+            reading.user = request.user
+            reading.save()
+            messages.success(request, "Blood pressure reading saved!")
+            return redirect("profile")
+    else:
+        form = BloodPressureReadingForm()
+
+    return render(request, "profiles/bp_reading_form.html", {"form": form})
+
+@login_required
+def bp_reading_list(request):
+    """Displays all blood pressure readings for the logged-in user."""
+    readings = BloodPressureReading.objects.filter(user=request.user)
+    return render(request, "profiles/bp_reading_list.html", {"readings": readings})
